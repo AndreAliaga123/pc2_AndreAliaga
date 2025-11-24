@@ -1,0 +1,5 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+pc2_AndreAliaga,com.mycompany.pc2_andrealiaga,TextProcessor,3,38,0,6,1,9,1,4,1,1
+pc2_AndreAliaga,com.mycompany.pc2_andrealiaga,InventoryManager,0,73,2,10,0,13,2,7,0,3
+pc2_AndreAliaga,com.mycompany.pc2_andrealiaga,PasswordValidator,3,75,1,23,1,21,2,12,1,1
+pc2_AndreAliaga,com.mycompany.pc2_andrealiaga,EmailValidator,3,112,1,31,1,30,2,16,1,1

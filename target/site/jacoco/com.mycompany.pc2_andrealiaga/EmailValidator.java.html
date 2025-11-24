@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EmailValidator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pc2_AndreAliaga</a> &gt; <a href="index.source.html" class="el_package">com.mycompany.pc2_andrealiaga</a> &gt; <span class="el_source">EmailValidator.java</span></div><h1>EmailValidator.java</h1><pre class="source lang-java linenums">package com.mycompany.pc2_andrealiaga;
+
+<span class="nc" id="L3">public class EmailValidator {</span>
+
+    public static boolean isValid(String email) {
+
+        // Escenario 1: null o vacío
+<span class="fc bfc" id="L8" title="All 4 branches covered.">        if (email == null || email.isEmpty()) {</span>
+<span class="fc" id="L9">            throw new IllegalArgumentException(&quot;El correo no puede ser nulo o vacío&quot;);</span>
+        }
+
+        // No espacios permitidos
+<span class="fc bfc" id="L13" title="All 2 branches covered.">        if (email.contains(&quot; &quot;)) {</span>
+<span class="fc" id="L14">            return false;</span>
+        }
+
+        // Longitud mínima y máxima
+<span class="fc bfc" id="L18" title="All 4 branches covered.">        if (email.length() &lt; 6 || email.length() &gt; 254) {</span>
+<span class="fc" id="L19">            return false;</span>
+        }
+
+        // Debe contener exactamente un @
+<span class="fc" id="L23">        int atIndex = email.indexOf(&quot;@&quot;);</span>
+<span class="fc" id="L24">        int lastAtIndex = email.lastIndexOf(&quot;@&quot;);</span>
+
+<span class="pc bpc" id="L26" title="1 of 4 branches missed.">        if (atIndex == -1 || atIndex != lastAtIndex) {</span>
+<span class="fc" id="L27">            return false; // no @ o múltiples @</span>
+        }
+
+<span class="fc" id="L30">        String local = email.substring(0, atIndex);</span>
+<span class="fc" id="L31">        String domain = email.substring(atIndex + 1);</span>
+
+        // Validar parte local
+        // - No puede iniciar ni terminar con punto
+        // - No puede tener dos puntos consecutivos
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (local.isEmpty() ||</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">            local.startsWith(&quot;.&quot;) ||</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">            local.endsWith(&quot;.&quot;) ||</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">            local.contains(&quot;..&quot;)) {</span>
+<span class="fc" id="L40">            return false;</span>
+        }
+
+        // Parte local solo puede tener letras, números, puntos, guiones, guion bajo
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (!local.matches(&quot;[A-Za-z0-9._-]+&quot;)) {</span>
+<span class="fc" id="L45">            return false;</span>
+        }
+
+        // Validar dominio: debe tener al menos un punto
+<span class="fc" id="L49">        int dotIndex = domain.indexOf(&quot;.&quot;);</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (dotIndex == -1) {</span>
+<span class="fc" id="L51">            return false;</span>
+        }
+
+        // Debe haber al menos 2 caracteres antes del punto
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (dotIndex &lt; 2) {</span>
+<span class="fc" id="L56">            return false;</span>
+        }
+
+        // Dominio no puede tener caracteres no permitidos
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (!domain.matches(&quot;[A-Za-z0-9.-]+&quot;)) {</span>
+<span class="fc" id="L61">            return false;</span>
+        }
+
+        // Extensión válida: mínimo 2 caracteres
+<span class="fc" id="L65">        String extension = domain.substring(domain.lastIndexOf(&quot;.&quot;) + 1);</span>
+
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (extension.length() &lt; 2) {</span>
+<span class="fc" id="L68">            return false;</span>
+        }
+
+<span class="fc" id="L71">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
